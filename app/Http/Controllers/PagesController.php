@@ -11,4 +11,9 @@ class PagesController extends Controller
         $posts = Post::all();
         return view('home', ['posts' => $posts]);
     }
+
+    public function showAdminPage() {
+        $posts = Post::all();
+        return view('admin', ['posts' => $posts]);
+    }
 }

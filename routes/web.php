@@ -16,8 +16,11 @@ use App\Http\Controllers\PostsController;
 */
 
 Route::get('/', [PagesController::class, 'showHomePage']);
-
 Route::get('/post/{id}', [PostsController::class, 'getPostById']);
+
+
+Route::get('/admin', [PagesController::class, 'showAdminPage'])->middleware(['auth']);
+Route::get('/admin/post/new', [PostsController::class, 'showNewPostForm'])->middleware(['auth']);
 
 
 Route::get('/dashboard', function () {

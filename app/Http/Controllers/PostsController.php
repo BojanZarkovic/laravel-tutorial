@@ -11,4 +11,8 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         return view('post', ['post' => $post]);
     }
+
+    public function showNewPostForm(Request $request) {
+        return view('newPost');
+    }
 }
