@@ -21,7 +21,7 @@
                 <a href="/admin">admin</a>
                 <form method="post" action="/logout">
                     @csrf
-                    <input class="btn btn-primary" type="submit" value="Logout">
+                    <input class="btn btn-danger" type="submit" value="Logout">
                 </form>
             @else
                 <a href="/login">login</a>
