@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function showHomePage() {
-        $posts = Post::all();
+        $posts = Post::paginate(8);
         return view('home', ['posts' => $posts]);
     }
 
     public function showAdminPage() {
-        $posts = Post::all();
+        $posts = Post::paginate(8);
         return view('admin', ['posts' => $posts]);
     }
 }

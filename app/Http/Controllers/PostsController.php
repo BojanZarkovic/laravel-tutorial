@@ -17,6 +17,12 @@ class PostsController extends Controller
     }
 
     public function createNewPost(Request $request) {
+
+        $request->validate([
+            'title' => 'required|string|max:5',
+            'body' => 'required|string'
+        ]);
+
         $title = $request->title;
         $body = $request->body;
 
@@ -30,13 +36,13 @@ class PostsController extends Controller
     }
 
     public function showEditPostForm(Request $request, $id) {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         return view('editPost', ['post' => $post]);
     }
 
     public function editPost(Request $request, $id) {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         $title = $request->title;
         $body = $request->body;
@@ -46,5 +52,13 @@ class PostsController extends Controller
         $post->save();
 
         return view('editPost', ['post' => $post, 'message' => 'Post successfully edited!']);
+    }
+
+    public function deletePost(Request $request, $id) {
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        return redirect()->back()->with('message', 'Post successfully deleted!');
     }
 }

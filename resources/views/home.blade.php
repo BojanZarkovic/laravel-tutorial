@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 @foreach($posts as $post)
-                    <div class="col-sm">
+                    <div class="col-md-3">
                         <div class="card mb-3">
                             <a href="/post/{{ $post->id }}"><img src="https://picsum.photos/400/200?random={{ $post->id }}" class="card-img-top" alt="..."></a>
                             <div class="card-body">
@@ -24,6 +24,7 @@
                 @endforeach
             </div>
         </div>
+        {{ $posts->links() }}
     </div>
 @endsection
 

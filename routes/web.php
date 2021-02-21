@@ -24,6 +24,7 @@ Route::get('/admin/post/new', [PostsController::class, 'showNewPostForm'])->midd
 Route::get('/admin/post/edit/{id}', [PostsController::class, 'showEditPostForm'])->middleware(['auth']);
 Route::post('/admin/post', [PostsController::class, 'createNewPost'])->middleware(['auth']);
 Route::put('/admin/post/{id}', [PostsController::class, 'editPost'])->middleware(['auth']);
+Route::delete('/admin/post/{id}', [PostsController::class, 'deletePost'])->middleware(['auth']);
 
 
 Route::get('/dashboard', function () {
