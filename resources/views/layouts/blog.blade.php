@@ -16,16 +16,23 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/">Blog</a>
-            @if(Auth::user())
-                <p>{{ Auth::user()->email }}</p>
-                <a href="/admin">admin</a>
-                <form method="post" action="/logout">
-                    @csrf
-                    <input class="btn btn-danger" type="submit" value="Logout">
-                </form>
-            @else
-                <a href="/login">login</a>
-            @endif
+            <ul class="navbar-nav mb-2 mb-lg-0 float-end">
+                @if(Auth::user())
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="/logout">
+                            @csrf
+                            <input class="btn btn-danger" type="submit" value="Logout">
+                        </form>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                @endif
+            </ul>
         </div>
     </nav>
 

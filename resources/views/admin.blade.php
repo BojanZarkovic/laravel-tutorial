@@ -18,18 +18,20 @@
             <div class="col-md-6">
                 <ul class="list-group">
                     @foreach($posts as $post)
-                        <li class="list-group-item">{{ $post->title }} <a href="/admin/post/edit/{{ $post->id }}" class="btn btn-light float-end">Edit</a>
-                            <form method="post" action="/admin/post/{{ $post->id }}">
+                        <li class="list-group-item">{{ Illuminate\Support\Str::limit($post->title, $limit = 50, $end = '...') }} <a href="/admin/post/edit/{{ $post->id }}" class="btn btn-light float-end">Edit</a>
+                            <form class="float-end" method="post" action="/admin/post/{{ $post->id }}">
                                 @csrf
                                 @method('DELETE')
-                                <input class="btn btn-danger float-end" type="submit" value="Delete">
+                                <input class="btn btn-danger" type="submit" value="Delete">
                             </form>
                         </li>
                     @endforeach
                 </ul>
             </div>
         </div>
+        <div class="row pt-5">
             {{ $posts->links() }}
+        </div>
     </div>
 @endsection
 
