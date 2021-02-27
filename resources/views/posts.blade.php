@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm pt-5">
-                <h4>latest posts</h4>
+                <h4>All posts</h4>
             </div>
         </div>
         <div class="row">
@@ -23,10 +23,7 @@
             @endforeach
         </div>
         <div class="row">
-            <div class="col-md-9">
-                <a href="/posts" class="btn btn-success float-end">See all posts</a>
-            </div>
-
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection

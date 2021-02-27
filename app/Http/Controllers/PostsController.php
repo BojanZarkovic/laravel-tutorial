@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function getAllPosts(Request $request) {
+        $posts = Post::paginate(8);
+        return view('posts', ['posts' => $posts]);
+    }
+
     public function getPostById(Request $request, $id) {
         $post = Post::findOrFail($id);
         return view('post', ['post' => $post]);
