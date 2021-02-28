@@ -12,6 +12,11 @@ class PostsController extends Controller
         return view('posts', ['posts' => $posts]);
     }
 
+    public function getPostsByUser(Request $request, $userId) {
+        $posts = Post::where('user_id', $userId)->paginate(8);
+        return view('posts', ['posts' => $posts]);
+    }
+
     public function getPostById(Request $request, $id) {
         $post = Post::findOrFail($id);
         return view('post', ['post' => $post]);

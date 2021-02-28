@@ -23,6 +23,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
+            'user_id' => rand(1,4),
             'body' => $this->faker->text,
             'created_at' => $this->faker->dateTime,
             'updated_at' => now()

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function showHomePage() {
-        $posts = Post::latest()->take(3)->get();
+        $posts = Post::with('user')->latest()->take(3)->get();
         return view('home', ['posts' => $posts]);
     }
 
