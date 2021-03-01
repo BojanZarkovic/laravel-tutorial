@@ -2,46 +2,39 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-sm pt-5">
-                <form method="POST" action="{{ route('login') }}">
-                @csrf
-
-                <!-- Email Address -->
-                    <div>
-                        <x-label for="email" :value="__('Email')" />
-                        <x-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+        <div class="row pt-5">
+            <div class="col-lg-6">
+                <form method="post" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-
-                    <!-- Password -->
-                    <div class="mt-4">
-                        <x-label for="password" :value="__('Password')" />
-
-                        <x-input id="password"
-                                 type="password"
-                                 name="password"
-                                 required autocomplete="current-password" />
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" name="password" class="form-control" value="{{ old('password') }}" autocomplete="current-password" required>
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-
                     <!-- Remember Me -->
-                    <div>
+                    <div class="mb-3">
                         <label for="remember_me">
                             <input id="remember_me" type="checkbox" name="remember">
                             <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                         </label>
                     </div>
-
-                    <div>
-                        @if (Route::has('password.request'))
+                    <input class="btn btn-primary" type="submit" value="Login">
+                    @if (Route::has('password.request'))
+                        <div class="mb-3  pt-5">
                             <a href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
-                        @endif
-
-                        <x-button class="btn btn-primary">
-                            {{ __('Login') }}
-                        </x-button>
-                    </div>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>
