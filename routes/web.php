@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
@@ -28,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/post', [PostsController::class, 'createNewPost']);
     Route::put('/admin/post/{id}', [PostsController::class, 'editPost']);
     Route::delete('/admin/post/{id}', [PostsController::class, 'deletePost']);
+
+    Route::get('/admin/category/new', [CategoryController::class, 'showNewCategoryForm']);
+    Route::post('/admin/category', [CategoryController::class, 'createNewCategory']);
 });
 
 require __DIR__.'/auth.php';

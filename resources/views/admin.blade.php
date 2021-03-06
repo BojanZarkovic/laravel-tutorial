@@ -13,6 +13,9 @@
             <div class="col-sm pt-5">
                 <a href="/admin/post/new" class="btn btn-success">New Post</a>
             </div>
+            <div class="col-sm pt-5">
+                <a href="/admin/category/new" class="btn btn-success">New Category</a>
+            </div>
         </div>
         <div class="row pt-5">
             <div class="col-md-6">
