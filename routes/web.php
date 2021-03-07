@@ -22,14 +22,20 @@ Route::get('/posts', [PostsController::class, 'getAllPosts']);
 Route::get('/posts/user/{userId}', [PostsController::class, 'getPostsByUser']);
 
 
+// admin
 Route::middleware(['auth'])->group(function () {
+
+    // pages
     Route::get('/admin', [PagesController::class, 'showAdminPage']);
+
+    // posts
     Route::get('/admin/post/new', [PostsController::class, 'showNewPostForm']);
     Route::get('/admin/post/edit/{id}', [PostsController::class, 'showEditPostForm']);
     Route::post('/admin/post', [PostsController::class, 'createNewPost']);
     Route::put('/admin/post/{id}', [PostsController::class, 'editPost']);
     Route::delete('/admin/post/{id}', [PostsController::class, 'deletePost']);
 
+    // categories
     Route::get('/admin/category/new', [CategoryController::class, 'showNewCategoryForm']);
     Route::post('/admin/category', [CategoryController::class, 'createNewCategory']);
 });
