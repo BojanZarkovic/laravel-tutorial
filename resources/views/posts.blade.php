@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             @foreach($posts as $post)
-                <x-post :post="$post" :size="3"/>
+                <x-post :post="$post" :size="3" :isPreview=true/>
             @endforeach
         </div>
         <div class="row">

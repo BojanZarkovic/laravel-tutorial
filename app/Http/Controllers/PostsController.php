@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,22 +10,23 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
     public function getAllPosts(Request $request) {
-        $posts = Post::paginate(8);
+        $posts = Post::with(['user', 'categories'])->paginate(8);
         return view('posts', ['posts' => $posts]);
     }
 
     public function getPostsByUser(Request $request, $userId) {
-        $posts = Post::where('user_id', $userId)->paginate(8);
+        $posts = Post::where('user_id', $userId)->with(['user', 'categories'])->paginate(8);
         return view('posts', ['posts' => $posts]);
     }
 
     public function getPostById(Request $request, $id) {
-        $post = Post::findOrFail($id);
+        $post = Post::with(['user', 'categories'])->findOrFail($id);
         return view('post', ['post' => $post]);
     }
 
     public function showNewPostForm(Request $request) {
-        return view('newPost');
+        $categories = Category::all();
+        return view('newPost', ['categories' => $categories]);
     }
 
     public function createNewPost(Request $request) {
@@ -33,11 +35,13 @@ class PostsController extends Controller
 
         $request->validate([
             'title' => 'required|string',
-            'body' => 'required|string'
+            'body' => 'required|string',
+            'categories' => 'sometimes|array'
         ]);
 
         $title = $request->title;
         $body = $request->body;
+        $categoryIds = $request->categories ? $request->categories : [];
 
         $post = new Post();
         $post->title = $title;
@@ -46,17 +50,20 @@ class PostsController extends Controller
 
         $post->save();
 
+        $post->categories()->sync($categoryIds);
+
         return redirect('/admin');
     }
 
     public function showEditPostForm(Request $request, $id) {
-        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        $post = Post::with(['user', 'categories'])->findOrFail($id);
 
-        return view('editPost', ['post' => $post]);
+        return view('editPost', ['post' => $post, 'categories' => $categories]);
     }
 
     public function editPost(Request $request, $id) {
-        $post = Post::findOrFail($id);
+        $post = Post::with(['user', 'categories'])->findOrFail($id);
 
         $title = $request->title;
         $body = $request->body;

@@ -22,16 +22,25 @@ class Post extends Component
     public $size;
 
     /**
+     * Is preview of a post or a full post?
+     *
+     * @var bool
+     */
+    public $isPreview;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      * @param  \App\Models\Post  $post
      * @param  string  $size
+     * @param  bool  $isPreview
      */
-    public function __construct(\App\Models\Post $post, string $size)
+    public function __construct(\App\Models\Post $post, string $size, bool $isPreview)
     {
         $this->post = $post;
         $this->size = $size;
+        $this->isPreview = $isPreview;
     }
 
     /**

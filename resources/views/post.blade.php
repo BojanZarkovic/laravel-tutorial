@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 pt-5">
-                <x-post :post="$post" :size="12"/>
+                <x-post :post="$post" :size="12" :isPreview=false/>
             </div>
         </div>
     </div>

@@ -20,6 +20,14 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="categories" class="form-label">Categories</label>
+                        <select id="categories" name="categories[]" class="form-select" multiple aria-label="multiple select example">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <input class="btn btn-primary" type="submit" value="Submit">
                 </form>
             </div>
