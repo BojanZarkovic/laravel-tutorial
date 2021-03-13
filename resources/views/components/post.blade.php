@@ -3,7 +3,7 @@
         <a href="/post/{{ $post->id }}"><img src="https://picsum.photos/400/200?random={{ $post->id }}" class="card-img-top" alt="..."></a>
         <div class="card-body">
             @foreach($post->categories as $category)
-                <span class="badge rounded-pill bg-secondary mb-3">{{ $category->title }}</span>
+                <a href="/posts/category/{{ $category->id }}"><span class="badge rounded-pill bg-secondary mb-3">{{ $category->title }}</span></a>
             @endforeach
             <h5 class="card-title">{{ $post->title }}</h5>
             @if($post->user)

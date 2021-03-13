@@ -13,7 +13,7 @@ class PagesController extends Controller
     }
 
     public function showAdminPage() {
-        $posts = Post::paginate(8);
+        $posts = Post::withoutGlobalScopes()->paginate(8);
         return view('admin', ['posts' => $posts]);
     }
 }

@@ -21,7 +21,7 @@
             <div class="col-md-6">
                 <ul class="list-group">
                     @foreach($posts as $post)
-                        <li class="list-group-item">{{ Illuminate\Support\Str::limit($post->title, $limit = 50, $end = '...') }} <a href="/admin/post/edit/{{ $post->id }}" class="btn btn-light float-end">Edit</a>
+                        <li class=" {{ $post->deleted ? 'list-group-item list-group-item-danger' : 'list-group-item' }}">{{ Illuminate\Support\Str::limit($post->title, $limit = 50, $end = '...') }} <a href="/admin/post/edit/{{ $post->id }}" class="btn btn-light float-end">Edit</a>
                             <form class="float-end" method="post" action="/admin/post/{{ $post->id }}">
                                 @csrf
                                 @method('DELETE')

@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::addGlobalScope('deleted', function (Builder $builder) {
+            $builder->where('deleted', 0);
+        });
+    }
 
     /**
      * Get the user that owns the post.
@@ -24,4 +32,6 @@ class Post extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+
 }
