@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row pt-5">
             <div class="col-lg-6">
-                <form method="post" action="/admin/post">
+                <form method="post" action="/admin/post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="postTitle" class="form-label">Post title</label>
@@ -27,6 +27,13 @@
                                 <option value="{{ $category->id }}">{{ $category->title }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Post title</label>
+                        <input type="file" class="form-control" id="image" value="{{ old('image') }}" name="image">
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <input class="btn btn-primary" type="submit" value="Submit">
                 </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateNewPostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
@@ -39,23 +40,21 @@ class PostsController extends Controller
         return view('newPost', ['categories' => $categories]);
     }
 
-    public function createNewPost(Request $request) {
+    public function createNewPost(CreateNewPostRequest $request) {
 
         $user = Auth::user();
-
-        $request->validate([
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'categories' => 'sometimes|array'
-        ]);
 
         $title = $request->title;
         $body = $request->body;
         $categoryIds = $request->categories ? $request->categories : [];
+        $image = $request->image;
+
+        $path = $image->store('images');
 
         $post = new Post();
         $post->title = $title;
         $post->body = $body;
+        $post->image = $path;
         $post->user_id = $user->id;
 
         $post->save();
@@ -72,13 +71,7 @@ class PostsController extends Controller
         return view('editPost', ['post' => $post, 'categories' => $categories]);
     }
 
-    public function editPost(Request $request, $id) {
-
-        $request->validate([
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'categories' => 'sometimes|array'
-        ]);
+    public function editPost(CreateNewPostRequest $request, $id) {
 
         $post = Post::with(['user', 'categories'])->findOrFail($id);
 
@@ -110,5 +103,16 @@ class PostsController extends Controller
         }
 
         return redirect()->back()->with('message', $message);
+    }
+
+    public function getPostsBySearchTerm(Request $request) {
+
+        $request->validate([
+            'term' => 'sometimes|string|max:255|nullable'
+        ]);
+
+        $term = $request->term;
+        $posts = $term ? Post::where('title', 'like', '%' . $term . '%')->paginate(8) : Post::with(['user', 'categories'])->paginate(8);
+        return view('posts', ['posts' => $posts, 'term' => $term]);
     }
 }

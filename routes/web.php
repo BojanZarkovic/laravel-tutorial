@@ -21,6 +21,7 @@ Route::get('/post/{id}', [PostsController::class, 'getPostById']);
 Route::get('/posts', [PostsController::class, 'getAllPosts']);
 Route::get('/posts/user/{userId}', [PostsController::class, 'getPostsByUser']);
 Route::get('/posts/category/{categoryId}', [PostsController::class, 'getPostsByCategory']);
+Route::get('/posts/search', [PostsController::class, 'getPostsBySearchTerm']);
 
 
 // admin

@@ -18,10 +18,16 @@
                         <label for="postTitle" class="form-label">Post title</label>
                         <input type="text" class="form-control" id="postTitle" name="title" value="{{ $post->title }}" required>
                     </div>
+                    @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="postBody" class="form-label">Post body</label>
                         <textarea class="form-control" id="postBody" rows="10" name="body" required>{{ $post->body }}</textarea>
                     </div>
+                    @error('body')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="categories" class="form-label">Categories</label>
                         <select id="categories" name="categories[]" class="form-select" multiple aria-label="multiple select example">
