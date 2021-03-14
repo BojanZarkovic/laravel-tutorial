@@ -112,7 +112,7 @@ class PostsController extends Controller
         ]);
 
         $term = $request->term;
-        $posts = $term ? Post::where('title', 'like', '%' . $term . '%')->paginate(8) : Post::with(['user', 'categories'])->paginate(8);
+        $posts = $term ? Post::with(['user', 'categories'])->where('title', 'like', '%' . $term . '%')->paginate(8) : Post::with(['user', 'categories'])->paginate(8);
         return view('posts', ['posts' => $posts, 'term' => $term]);
     }
 }
