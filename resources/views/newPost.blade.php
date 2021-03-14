@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Post title</label>
+                        <label for="image" class="form-label">Post image</label>
                         <input type="file" class="form-control" id="image" value="{{ old('image') }}" name="image">
                         @error('image')
                             <div class="alert alert-danger">{{ $message }}</div>
