@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -49,13 +50,19 @@ class PostsController extends Controller
         $categoryIds = $request->categories ? $request->categories : [];
         $image = $request->image;
 
-        $path = $image->store('images');
-
         $post = new Post();
         $post->title = $title;
         $post->body = $body;
-        $post->image = $path;
         $post->user_id = $user->id;
+
+        if ($image) {
+            $extension = $image->extension();
+            $fileName = time() . '.' . $extension;
+            $path = $image->storeAs('public', $fileName);
+            $interventionImg = Image::make('storage/' . $fileName);
+            $interventionImg->fit(400, 200)->save();
+            $post->image = $fileName;
+        }
 
         $post->save();
 
@@ -78,10 +85,20 @@ class PostsController extends Controller
         $title = $request->title;
         $body = $request->body;
         $categoryIds = $request->categories ? $request->categories : [];
+        $image = $request->image;
 
         $post->title = $title;
         $post->body = $body;
         $post->categories()->sync($categoryIds);
+
+        if ($image) {
+            $extension = $image->extension();
+            $fileName = time() . '.' . $extension;
+            $path = $image->storeAs('public', $fileName);
+            $interventionImg = Image::make('storage/' . $fileName);
+            $interventionImg->fit(400, 200)->save();
+            $post->image = $fileName;
+        }
 
         $post->save();
 

@@ -1,6 +1,12 @@
 <div class="col-md-{{ $size }}">
     <div class="card mb-3">
-        <a href="/post/{{ $post->id }}"><img src="https://picsum.photos/400/200?random={{ $post->id }}" class="card-img-top" alt="..."></a>
+        <a href="/post/{{ $post->id }}">
+            @if($post->image)
+                <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="...">
+            @else
+                <img src="https://picsum.photos/400/200?random={{ $post->id }}" class="card-img-top" alt="...">
+            @endif
+        </a>
         <div class="card-body">
             @foreach($post->categories as $category)
                 <a href="/posts/category/{{ $category->id }}"><span class="badge rounded-pill bg-secondary mb-3">{{ $category->title }}</span></a>

@@ -11,7 +11,7 @@
         @endif
         <div class="row pt-5">
             <div class="col-lg-6">
-                <form method="post" action="/admin/post/{{ $post->id }}">
+                <form method="post" action="/admin/post/{{ $post->id }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
@@ -39,6 +39,16 @@
                                 <option {{ array_search($category->id, $postCategoryIds) !== false ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Post image</label>
+                        <input type="file" class="form-control" id="image" value="{{ old('image') }}" name="image">
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <input class="btn btn-primary" type="submit" value="Submit">
                 </form>
