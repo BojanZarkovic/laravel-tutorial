@@ -20,7 +20,7 @@
             <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small></p>
             @if($isPreview)
                 <p class="card-text">{{ Illuminate\Support\Str::limit($post->body, $limit = 150, $end = '...') }}</p>
-                <a href="/post/{{ $post->id }}" class="btn btn-primary">Read more</a>
+                <a href="/post/{{ $post->slug }}" class="btn btn-primary">Read more</a>
             @else
                 <p class="card-text">{{ $post->body }}</p>
             @endif

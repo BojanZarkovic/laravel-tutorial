@@ -25,6 +25,8 @@ class CreateNewPostRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
+            'keywords' => 'sometimes|string',
+            'description' => 'sometimes|string',
             'body' => 'required|string',
             'categories' => 'sometimes|array',
             'image' => 'sometimes|image'

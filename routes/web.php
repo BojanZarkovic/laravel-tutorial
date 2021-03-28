@@ -17,7 +17,7 @@ use App\Http\Controllers\PostsController;
 */
 
 Route::get('/', [PagesController::class, 'showHomePage']);
-Route::get('/post/{id}', [PostsController::class, 'getPostById']);
+Route::get('/post/{slug}', [PostsController::class, 'getPostBySlug']);
 Route::get('/posts', [PostsController::class, 'getAllPosts']);
 Route::get('/posts/user/{userId}', [PostsController::class, 'getPostsByUser']);
 Route::get('/posts/category/{categoryId}', [PostsController::class, 'getPostsByCategory']);

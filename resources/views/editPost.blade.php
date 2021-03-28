@@ -4,12 +4,14 @@
     <div class="container">
         @if(isset($message))
             <div class="row pt-5">
-                <div class="alert alert-success" role="alert">
-                    {{ $message }}
+                <div class="col-lg-6">
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
                 </div>
             </div>
         @endif
-        <div class="row pt-5">
+        <div class="row pt-5 pb-5">
             <div class="col-lg-6">
                 <form method="post" action="/admin/post/{{ $post->id }}" enctype="multipart/form-data">
                     @csrf
@@ -40,9 +42,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}">
-                    </div>
+                    @if($post->image)
+                        <div class="mb-3">
+                            <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}">
+                        </div>
+                    @endif
                     <div class="mb-3">
                         <label for="image" class="form-label">Post image</label>
                         <input type="file" class="form-control" id="image" value="{{ old('image') }}" name="image">

@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
@@ -36,6 +37,11 @@ class PostsController extends Controller
         return view('post', ['post' => $post]);
     }
 
+    public function getPostBySlug(Request $request, $slug) {
+        $post = Post::with(['user', 'categories'])->where('slug', $slug)->firstOrFail();
+        return view('post', ['post' => $post]);
+    }
+
     public function showNewPostForm(Request $request) {
         $categories = Category::all();
         return view('newPost', ['categories' => $categories]);
@@ -46,12 +52,17 @@ class PostsController extends Controller
         $user = Auth::user();
 
         $title = $request->title;
+        $keywords = $request->keywords;
+        $description = $request->description;
         $body = $request->body;
         $categoryIds = $request->categories ? $request->categories : [];
         $image = $request->image;
 
         $post = new Post();
         $post->title = $title;
+        $post->keywords = $keywords;
+        $post->description = $description;
+
         $post->body = $body;
         $post->user_id = $user->id;
 

@@ -14,6 +14,20 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for="postKeywords" class="form-label">Keywords</label>
+                        <input type="text" class="form-control" id="postKeywords" value="{{ old('keywords') }}" name="keywords">
+                        @error('keywords')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="postDescription" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="postDescription" value="{{ old('description') }}" name="description">
+                        @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="postBody" class="form-label">Post body</label>
                         <textarea class="form-control" id="postBody" rows="10" name="body" required>{{ old('body') }}</textarea>
                         @error('body')
