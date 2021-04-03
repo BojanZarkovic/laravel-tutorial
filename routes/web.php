@@ -17,6 +17,8 @@ use App\Http\Controllers\PostsController;
 */
 
 Route::get('/', [PagesController::class, 'showHomePage']);
+Route::get('/contact', [PagesController::class, 'showContactPage']);
+Route::post('/contact', [PagesController::class, 'sendContactMessage']);
 Route::get('/post/{slug}', [PostsController::class, 'getPostBySlug']);
 Route::get('/posts', [PostsController::class, 'getAllPosts']);
 Route::get('/posts/user/{userId}', [PostsController::class, 'getPostsByUser']);

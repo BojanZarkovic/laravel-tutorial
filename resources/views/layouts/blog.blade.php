@@ -18,6 +18,9 @@
         <div class="container">
             <a class="navbar-brand" href="/">Blog</a>
             <ul class="navbar-nav mb-2 mb-lg-0 float-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
                 @if(Auth::user())
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin</a>
